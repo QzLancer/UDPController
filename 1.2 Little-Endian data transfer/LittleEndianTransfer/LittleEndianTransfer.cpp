@@ -67,6 +67,7 @@ int InitializeUDP(const char* _hostip, u_short _hostport, const char* _controlle
         perror("Bind error\n");
         return 1;
     }
+
     printf("Host socket binding finish. ip: %s, port: %d\n", inet_ntoa(HostAddr.sin_addr), ntohs(HostAddr.sin_port));
 
     //4、控制器ip地址和端口号设置
