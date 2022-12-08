@@ -127,10 +127,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CCmdFrame.cpp" />
+    <ClCompile Include="CFrame.cpp" />
+    <ClCompile Include="CSyncFrame.cpp" />
     <ClCompile Include="CUDPService.cpp" />
     <ClCompile Include="UDPController_backend.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CCmdFrame.h" />
+    <ClInclude Include="CFrame.h" />
+    <ClInclude Include="CSyncFrame.h" />
     <ClInclude Include="CUDPService.h" />
     <ClInclude Include="datatype.h" />
   </ItemGroup>

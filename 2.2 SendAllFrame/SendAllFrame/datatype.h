@@ -22,3 +22,6 @@ struct PDUStruct {
     UInt8 PF2 = 0;  //功能码2
     UInt8 FrameData[255] = { '\0' }; //帧数据
 };
+
+/// @brief 允许的最大连接数：15
+const char cMaxConnection = 15;

@@ -3,21 +3,14 @@
 // By QzLancer
 
 #include "CUDPService.h"
+#include "CSyncFrame.h"
+#include "CCmdFrame.h";
 
 int main()
 {
-	//CUDPServiceTest
-	CUDPService UDPtest;
-	UDPtest.SetHostIP("192.168.199.235");
-	UDPtest.SetInitHostPort(8004);
-	UDPtest.SetControllerIP("192.168.199.235");
-	UDPtest.SetInitControllerPort(8005);
-	UDPtest.SetControllerID(1);
+	CUDPService* udpservice = new CUDPService;
 
-	UDPtest.BindSocket();
-	UInt8 send[5] = { 'N','E','I','O','U'};
-	while (1) {
-		UDPtest.SendFrame(send, 5);
-	}
+	CCmdFrame cmdframe(udpservice);
 
+	if (udpservice == NULL) delete udpservice;
 }
