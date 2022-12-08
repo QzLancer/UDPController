@@ -4,38 +4,67 @@ SendAllFrame::SendAllFrame(QWidget *parent)
     : QWidget(parent)
 {
     ui.setupUi(this);
-    connect(ui.pushButton, SIGNAL(clicked()), this, SLOT(slotConnet()));
-    connect(ui.pushButton_2, SIGNAL(clicked()), this, SLOT(slotConnet2()));
+
+    connect(ui.pushButton, SIGNAL(clicked()), this, SLOT(slotConnect()));
+
+    // ÐÄÌø¼ì²âÆµÂÊÎª1Hz
+    connect(ui.pushButton_2, SIGNAL(clicked()), this, SLOT(slotStartHeatBeat()));
+    connect(ui.pushButton_3, SIGNAL(clicked()), this, SLOT(slotStopHeatBeat()));
+    connect(&m_HeatBeatTimer, SIGNAL(timeout()), this, SLOT(slotSendHeatBeatPDU()));
 }
 
 SendAllFrame::~SendAllFrame()
 {}
 
-void SendAllFrame::slotConnet()
+void SendAllFrame::slotConnect()
 {
-    m_udpservice.SetHostIP("192.168.199.235");
-    m_udpservice.SetInitHostPort(60100);
-    m_udpservice.SetControllerIP("192.168.199.235");
-    m_udpservice.SetInitControllerPort(60000);
+    m_UDPService.SetHostIP("192.168.199.235");
+    m_UDPService.SetInitHostPort(60100);
+    m_UDPService.SetControllerIP("192.168.199.235");
+    m_UDPService.SetInitControllerPort(60000);
 
-    m_udpservice.ConnectSocket(1);
+    m_UDPService.ConnectSocket(1);
 
-    UInt8 sendbuf[256] = { "Hello Controller 1!" };
-
-    m_udpservice.SendFrame(sendbuf, 20, 1);
-
-    m_udpservice.DisconncetSocket(2);
+    
 }
 
-void SendAllFrame::slotConnet2()
+void SendAllFrame::slotStartHeatBeat()
 {
-    m_udpservice.ConnectSocket(2);
+    if (!m_HeatBeatTimer.isActive()) {
+        m_HeatBeatTimer.start(HeatBeatGap);
+    }
+}
 
-    UInt8 sendbuf2[256] = { "Hello Controller 2!" };
+void SendAllFrame::slotStopHeatBeat()
+{
+    if (m_HeatBeatTimer.isActive()) {
+        m_HeatBeatTimer.stop();
+    }
+}
 
-    m_udpservice.SendFrame(sendbuf2, 20, 2);
+void SendAllFrame::slotSendHeatBeatPDU()
+{
+    UInt8 send[256] = { "HeatBeat PDU" };
+    m_UDPService.SendFrame(send, 14, 1);
+}
 
-    UInt8 sendbuf[256] = { "Hello Controller 1!" };
+bool SendAllFrame::_ConvertPDUtoFrame(PDUStruct _pdu, UInt8* const _frame)
+{
+    if (_pdu.N < 7) {
+        printf("Error: Frame size is less than 7!");
+        return false;
+    }
+    UInt8* frame = new UInt8[_pdu.N];
+    frame[0] = _pdu.Head1;
+    frame[1] = _pdu.Head2;
+    frame[2] = _pdu.N;
+    frame[3] = _pdu.SA;
+    frame[4] = _pdu.DA;
+    frame[5] = _pdu.PF1;
+    frame[6] = _pdu.PF2;
+    for (UInt8 i = 7; i < _pdu.N; ++i) {
+        frame[i] = _pdu.FrameData[i - 7];
+    }
 
-    m_udpservice.SendFrame(sendbuf, 20, 1);
+    return true;
 }

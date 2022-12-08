@@ -130,7 +130,20 @@
     </rect>
    </property>
    <property name="text">
-    <string>Connect2</string>
+    <string>start</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>200</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>stop</string>
    </property>
   </widget>
  </widget>
