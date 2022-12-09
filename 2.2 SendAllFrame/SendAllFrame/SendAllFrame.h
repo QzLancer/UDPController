@@ -19,17 +19,16 @@ public:
 
 public slots:
     /// @brief 连接到设备
-    void slotConnect();
+    void slotClickConnectBtn();
 
     /// @brief 开始心跳监测
-    void slotStartHeatBeat();
+    void slotClickStartHeatBeatBtn();
 
     /// @brief 停止心跳监测
-    void slotStopHeatBeat();
+    void slotClickStopHeatBeatBtn();
 
-    /// @brief 发送心跳监测PDE
-    void slotSendHeatBeatPDU();
-
+    /// @brief 开始设备自检;
+    void slotClickSelfCheckBtn();
 
 protected:
 
@@ -38,8 +37,21 @@ protected:
 
 private:
     Ui::SendAllFrameClass ui;
-    CUDPService m_UDPService;
-    QTimer m_HeatBeatTimer;
 
-    const int HeatBeatGap = 1000; //1000ms发送一次心跳监测的Timer
+    CUDPService m_UDPService;
+
+    QTimer m_HeatBeatTimer; //心跳监测定时器
+    const int m_HeatBeatGap = 1000; //1000ms发送一次心跳监测的Timer
+    
+    int m_CommandCount = 0; //命令类指令发送次数统计，若发送3次无响应，上报通讯故障
+    QTimer m_CommandTimer;  //命令类指令定时器，用于在指令无响应情况下延时500ms发送新指令
+    const int m_CommandGap = 500;   //触发后间隔500ms主动发送一次指令
+
+private slots:
+
+    /// @brief 发送心跳监测PDU
+    void __slotSendHeatBeatPDU();
+
+    /// @brief 发送自检PDU
+    void __slotSendSelfCheckPDU();
 };

@@ -30,13 +30,7 @@ bool CUDPService::SendFrame(const UInt8 _frame[256], const int _size, const int 
     char sendbuf[256] = { 0 };
     memcpy(sendbuf, _frame, _size * sizeof(char));  //不能直接输出UInt8类型变量，因此需要将内容拷贝到char类型的数组中
 
-    /*int sendlen = sendto(m_HostSocket[_controllerid - 1], sendbuf, _size * sizeof(char), 0, (sockaddr*)&m_ControllerAddr, m_ControllerAddrLen);
-    if (sendlen < 0) {
-        printf("Message: Send frame error!\n");
-        return false;
-    }*/
-
-    int sendlen = send(m_HostSocket[_controllerid - 1], sendbuf, strlen(sendbuf), 0);
+    int sendlen = send(m_HostSocket[_controllerid - 1], sendbuf, _size * sizeof(char), 0);
     if (sendlen < 0) {
         printf("Message: Send frame error!\n");
         return false;
@@ -53,11 +47,6 @@ bool CUDPService::RecvFrame(UInt8* const _frame, const int _size, const int _con
     }
 
     char recvbuf[256];
-    //int recvlen = recvfrom(m_HostSocket[_controllerid - 1], recvbuf, _size * sizeof(char), 0, (sockaddr*)&m_ControllerAddr, &m_ControllerAddrLen);
-    //if (recvlen < 0) {
-    //    printf("Message: Receive frame error!\n");
-    //    return false;
-    //}
     
     int recvlen = recv(m_HostSocket[_controllerid - 1], recvbuf, _size * sizeof(char), 0);
     if (recvlen < 0) {
@@ -182,6 +171,13 @@ bool CUDPService::ConnectSocket(const int _controllerid)
         return false;
     }
     printf("Host socket binding finish. ID: %d, ip: %s, port: %d\n", _controllerid, inet_ntoa(m_HostAddr.sin_addr), ntohs(m_HostAddr.sin_port));
+    //5、阻塞控制设置为100ms
+    timeval tv;
+    tv.tv_sec = 500;
+    tv.tv_usec = 0;
+    if (setsockopt(m_HostSocket[_controllerid - 1], SOL_SOCKET, SO_RCVTIMEO, (char*)&tv, sizeof(tv)) < 0) {
+        printf("socket option SO_RCVTIMEO not support\n");
+    }
 
     // 控制器ip地址和端口号设置
     m_ControllerAddr.sin_family = AF_INET;
