@@ -96,13 +96,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="SendAllFrame.qrc" />
-    <QtUic Include="SendAllFrame.ui" />
-    <QtMoc Include="SendAllFrame.h" />
+    <QtUic Include="CController.ui" />
+    <QtMoc Include="CController.h" />
+    <ClCompile Include="CCommandFrameManager.cpp" />
+    <ClCompile Include="CHeartBeatManager.cpp" />
     <ClCompile Include="CUDPService.cpp" />
-    <ClCompile Include="SendAllFrame.cpp" />
+    <ClCompile Include="CController.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="CHeartBeatManager.h" />
+    <QtMoc Include="CCommandFrameManager.h" />
     <ClInclude Include="CUDPService.h" />
     <ClInclude Include="datatype.h" />
   </ItemGroup>

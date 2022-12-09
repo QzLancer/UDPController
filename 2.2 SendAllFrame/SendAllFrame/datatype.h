@@ -1,5 +1,6 @@
 #pragma once
 #include <stdint.h>
+#include <memory>
 
 // 特定数据类型的定义
 #define Int8 int8_t
@@ -20,7 +21,7 @@ struct PDUStruct {
     UInt8 DA = 0;    //目标ID
     UInt8 PF1 = 0;  //功能码1
     UInt8 PF2 = 0;  //功能码2
-    UInt8 FrameData[255] = { '\0' }; //帧数据
+    UInt8 FrameData[255] = { 0 }; //帧数据
 };
 
 /// @brief 允许的最大连接数：15

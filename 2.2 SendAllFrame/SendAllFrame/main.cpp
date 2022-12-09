@@ -1,4 +1,4 @@
-#include "SendAllFrame.h"
+#include "CController.h"
 
 
 #include <QtWidgets/QApplication>
@@ -6,7 +6,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    SendAllFrame w;
+    CController w;
     w.show();
     return a.exec();
 }

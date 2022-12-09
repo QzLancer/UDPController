@@ -111,7 +111,27 @@ bool CUDPService::SetInitControllerPort(const int _port)
 
 bool CUDPService::ConnectStatus(const int _controllerid) const
 {
-    return m_bIsConnect;
+    return m_bIsConnect[_controllerid - 1];
+}
+
+bool CUDPService::ConvertPDUtoFrame(PDUStruct _pdu, UInt8* const _frame)
+{
+    if (_pdu.N < 7) {
+        printf("Error: Frame size is less than 7!");
+        return false;
+    }
+    _frame[0] = _pdu.Head1;
+    _frame[1] = _pdu.Head2;
+    _frame[2] = _pdu.N;
+    _frame[3] = _pdu.SA;
+    _frame[4] = _pdu.DA;
+    _frame[5] = _pdu.PF1;
+    _frame[6] = _pdu.PF2;
+    for (UInt8 i = 7; i < _pdu.N; ++i) {
+        _frame[i] = _pdu.FrameData[i - 7];
+    }
+
+    return true;
 }
 
 CUDPService::~CUDPService()

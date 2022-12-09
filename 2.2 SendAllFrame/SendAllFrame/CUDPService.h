@@ -57,6 +57,8 @@ public:
 	/// @return 如果该控制器以连接到主机，返回true，否则返回false
 	bool ConnectStatus(const int _controllerid) const;
 
+	bool ConvertPDUtoFrame(PDUStruct _pdu, UInt8* const _frame);
+
 	/// @brief 析构函数，关闭WSA和socket
 	~CUDPService();
 
