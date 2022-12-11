@@ -1,13 +1,12 @@
 #pragma once
-
 #include "ICmdFrameMgr.h"
 
-/// @brief 上电控制帧管理
-class CPwrCmdFrameMgr :
+/// @brief 复位帧管理
+class CResetCmdFrameMgr :
     public ICmdFrameMgr
 {
 public:
-    explicit CPwrCmdFrameMgr(std::shared_ptr<CUDPService> _udpservice);
+    explicit CResetCmdFrameMgr(std::shared_ptr<CUDPService> _udpservice);
 
     /// @brief 发送上电控制命令
     /// @param _id 设备id
@@ -20,6 +19,6 @@ protected:
 
 private:
     /// @brief 上电状态，Bit0-Bit5分别为1-6路交流，Bit6-Bit9为1-4路直流
-    bool m_PowerStatus[10] = {0};
+    bool m_bIsSuccess = false;
 };
 

@@ -1,5 +1,7 @@
 #pragma once
 #include "ICmdFrameMgr.h"
+
+/// @brief 通信控制帧管理
 class CCommCmdFrameMgr :
     public ICmdFrameMgr
 {
@@ -17,7 +19,7 @@ protected:
 private:
 
     /// @brief 通信状态
-    bool m_CommState = false;
+    bool m_CommStatus = false;
 
     /// @brief 1~8号节点CAN通讯标志位（0正常，1故障）
     bool m_CAN_Error[8] = {0};

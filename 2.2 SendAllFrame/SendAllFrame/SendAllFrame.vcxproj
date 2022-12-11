@@ -99,7 +99,9 @@
     <QtRcc Include="SendAllFrame.qrc" />
     <QtUic Include="CController.ui" />
     <QtMoc Include="CController.h" />
+    <ClCompile Include="CMsgFrameMgr.cpp" />
     <ClCompile Include="CPwrCmdFrameMgr.cpp" />
+    <ClCompile Include="CResetCmdFrameMgr.cpp" />
     <ClCompile Include="CRuntimeCmdFrameMgr.cpp" />
     <ClCompile Include="ICmdFrameMgr.cpp" />
     <ClCompile Include="CCommCmdFrameMgr.cpp" />
@@ -116,7 +118,9 @@
     <QtMoc Include="ICmdFrameMgr.h" />
     <ClInclude Include="CCommCmdFrameMgr.h" />
     <QtMoc Include="CSCCmdFrameMgr.h" />
+    <ClInclude Include="CMsgFrameMgr.h" />
     <ClInclude Include="CPwrCmdFrameMgr.h" />
+    <ClInclude Include="CResetCmdFrameMgr.h" />
     <ClInclude Include="CRuntimeCmdFrameMgr.h" />
     <ClInclude Include="CUDPService.h" />
     <ClInclude Include="datatype.h" />

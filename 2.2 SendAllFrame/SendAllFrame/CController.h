@@ -14,6 +14,7 @@
 #include <QtWidgets/QWidget>
 #include <QtCore/QTimer>
 
+/// @brief 控制器类，管理单个控制器的UDP通信、数据帧的发送与接收
 class CController : public QWidget
 {
     Q_OBJECT

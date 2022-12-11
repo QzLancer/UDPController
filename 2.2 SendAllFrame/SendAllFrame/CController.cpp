@@ -91,7 +91,7 @@ void CController::slotClickCommCtrlBtn()
 
 void CController::slotClickPwrCtrlBtn()
 {
-	bool tmp[10] = {true};
+	bool tmp[10] = {true, true, true, true, false, false , false , false , false , false };
 	if (m_UDPService->ConnectStatus(m_ControllerID)) {
 		m_CPwrManager.ExecCommand(m_ControllerID, tmp, true);
 	}

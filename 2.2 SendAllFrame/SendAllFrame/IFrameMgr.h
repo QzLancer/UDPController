@@ -12,6 +12,8 @@ class IFrameMgr : public QObject
 public:
 	explicit IFrameMgr(std::shared_ptr<CUDPService> _udpservice);
 
+	virtual ~IFrameMgr();
+
 protected:
 	/// @brief 对不同类型的帧进行解析
 	/// @param _recvframe 接受到的帧
@@ -22,5 +24,12 @@ protected:
 	PDUStruct m_PDUStruct;
 
 	int m_ControllerID = 1;	//需要发送消息的控制器id
+
+
+	int m_SendFrameSize = 0;
+	int m_RecvFrameSize = 0;
+
+	UInt8* m_SendFrame = NULL;
+	UInt8* m_RecvFrame = NULL;
 };
 

@@ -6,7 +6,7 @@
 #include <QtCore/QTimer>
 #include <QtCore/QDateTime>
 
-/// @brief 心跳监测管理
+/// @brief 心跳监测帧管理，以1Hz频率发送心跳监测
 class CHbFrameMgr : public IFrameMgr
 {
 	Q_OBJECT
@@ -28,13 +28,13 @@ private:
 	const int m_HeartBeatGap = 1000; //1000ms发送一次心跳监测的Timer
 
 	/// @brief 信息产生时间
-	UInt8 m_ReceivedTime[4] = {0};
+	UInt32 m_ReceivedTime = 0;
 
 	/// @brief 设备上下电状态（0-断电 1上电）Bit0-Bit5分别为1-6路交流，Bit6-Bit9为1-4路直流，Bit10-Bit15为备用
-	bool m_PowerState[10] = {false};
+	bool m_PowerStatus[10] = {false};
 
 	/// @brief 组合状态：0x01-未开启；0x02 - 自检中；0x04 - 就绪；0x05 - 指令响应中；0x07 - 故障；0x08 - 开启中
-	UInt8 CombineState = 0;
+	UInt8 CombineStatus = 0;
 
 
 

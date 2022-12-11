@@ -25,7 +25,7 @@ void CCommCmdFrameMgr::ExecCommand(int _id, bool _isforbidsend)
 void CCommCmdFrameMgr::_ParseFrame(UInt8* const _recvframe)
 {
 	// 第8字节数据：通信状态
-	m_CommState = _recvframe[7];
+	m_CommStatus = _recvframe[7];
 
 	// 第9字节数据：CAN_Error
 	for (int i = 0; i < 8; ++i) {

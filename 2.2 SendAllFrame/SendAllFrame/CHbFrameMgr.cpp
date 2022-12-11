@@ -34,20 +34,24 @@ void CHbFrameMgr::StopHeartBeat(int _id)
 void CHbFrameMgr::_ParseFrame(UInt8* const _recvframe)
 {
 	//第8-11字节数据：信息产生时间
-	memcpy(m_ReceivedTime, &_recvframe[7], 4 * sizeof(UInt8));
+	//memcpy(&m_ReceivedTime, &_recvframe[7], 4 * sizeof(UInt8));
+	m_ReceivedTime = 0;
+	for (int i = 0; i < 4; ++i) {
+		m_ReceivedTime += _recvframe[i + 7] * pow(256, i);
+	}
 	
 	//第12-13字节数据：设备上下电状态
 	for (int i = 0; i < 8; ++i) {
-		m_PowerState[i] = _recvframe[12] % 2;
+		m_PowerStatus[i] = _recvframe[11] % 2;
 		_recvframe[11] >>= 1;
 	}
 	for (int i = 0; i < 2; ++i) {
-		m_PowerState[i + 8] = _recvframe[13] % 2;
+		m_PowerStatus[i + 8] = _recvframe[12] % 2;
 		_recvframe[12] >>= 1;
 	}
 
 	//第14字节数据：组合状态
-	CombineState = _recvframe[13];
+	CombineStatus = _recvframe[13];
 
 }
 

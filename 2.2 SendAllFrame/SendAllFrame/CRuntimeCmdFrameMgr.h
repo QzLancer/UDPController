@@ -1,5 +1,7 @@
 #pragma once
 #include "ICmdFrameMgr.h"
+
+/// @brief 运行时间查询帧管理
 class CRuntimeCmdFrameMgr :
     public ICmdFrameMgr
 {
@@ -16,6 +18,6 @@ protected:
 
 private:
     /// @brief 开机总时长（小时），元素0-5分别为1-6路交流，元素6-9为1-4路直流
-    Int32 m_OpenTime[10] = {0};
+    UInt32 m_OpenTime[10] = {0};
 };
 

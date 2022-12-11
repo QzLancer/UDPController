@@ -29,7 +29,7 @@ void CSCCmdFrameMgr::_ParseFrame(UInt8* const _recvframe)
 {
 	// 第8字节数据：加电组合状态
 	for (int i = 0; i < 5; ++i) {
-		m_PowerState[i] = _recvframe[7] % 2;
+		m_PowerStatus[i] = _recvframe[7] % 2;
 		_recvframe[7] >>= 1;
 	}
 
