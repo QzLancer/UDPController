@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SendAllFrameClass</class>
- <widget class="QWidget" name="SendAllFrameClass">
+ <class>CControllerClass</class>
+ <widget class="QWidget" name="CControllerClass">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -59,7 +59,7 @@
      <widget class="QLineEdit" name="lineEdit_2"/>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="connectButton">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -120,43 +120,118 @@
     </item>
    </layout>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="startButton">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>160</y>
-     <width>75</width>
-     <height>23</height>
+     <x>190</x>
+     <y>100</y>
+     <width>131</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
    </property>
    <property name="text">
     <string>start</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="stopButton">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>200</y>
-     <width>75</width>
-     <height>23</height>
+     <x>190</x>
+     <y>160</y>
+     <width>131</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
    </property>
    <property name="text">
     <string>stop</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_4">
+  <widget class="QPushButton" name="selfcheckButton">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>240</y>
-     <width>75</width>
-     <height>23</height>
+     <x>190</x>
+     <y>220</y>
+     <width>121</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
    </property>
    <property name="text">
     <string>selfcheck</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="commctrlButton">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>100</y>
+     <width>171</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="text">
+    <string>Communication Control</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="powerctrlButton">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>160</y>
+     <width>171</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="text">
+    <string>Power Control</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="gettimeButton">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>220</y>
+     <width>171</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="text">
+    <string>Get Running time</string>
    </property>
   </widget>
  </widget>

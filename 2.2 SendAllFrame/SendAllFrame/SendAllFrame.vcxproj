@@ -16,6 +16,7 @@
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.22621.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.22621.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+    <ProjectName>CController</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -98,15 +99,25 @@
     <QtRcc Include="SendAllFrame.qrc" />
     <QtUic Include="CController.ui" />
     <QtMoc Include="CController.h" />
-    <ClCompile Include="CCommandFrameManager.cpp" />
-    <ClCompile Include="CHeartBeatManager.cpp" />
+    <ClCompile Include="CPwrCmdFrameMgr.cpp" />
+    <ClCompile Include="CRuntimeCmdFrameMgr.cpp" />
+    <ClCompile Include="ICmdFrameMgr.cpp" />
+    <ClCompile Include="CCommCmdFrameMgr.cpp" />
+    <ClCompile Include="CHbFrameMgr.cpp" />
+    <ClCompile Include="CSCCmdFrameMgr.cpp" />
     <ClCompile Include="CUDPService.cpp" />
     <ClCompile Include="CController.cpp" />
+    <ClCompile Include="IFrameMgr.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="CHeartBeatManager.h" />
-    <QtMoc Include="CCommandFrameManager.h" />
+    <QtMoc Include="IFrameMgr.h" />
+    <QtMoc Include="CHbFrameMgr.h" />
+    <QtMoc Include="ICmdFrameMgr.h" />
+    <ClInclude Include="CCommCmdFrameMgr.h" />
+    <QtMoc Include="CSCCmdFrameMgr.h" />
+    <ClInclude Include="CPwrCmdFrameMgr.h" />
+    <ClInclude Include="CRuntimeCmdFrameMgr.h" />
     <ClInclude Include="CUDPService.h" />
     <ClInclude Include="datatype.h" />
   </ItemGroup>

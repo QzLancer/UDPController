@@ -57,7 +57,13 @@ public:
 	/// @return 如果该控制器以连接到主机，返回true，否则返回false
 	bool ConnectStatus(const int _controllerid) const;
 
+	/// @brief 将PDU结构体转换成帧数据
+	/// @param _pdu PDU结构体
+	/// @param _frame 帧数据
+	/// @return 如果程序正常，返回true
 	bool ConvertPDUtoFrame(PDUStruct _pdu, UInt8* const _frame);
+
+	bool SendPDU(PDUStruct _pdu, const int _controllerid);
 
 	/// @brief 析构函数，关闭WSA和socket
 	~CUDPService();

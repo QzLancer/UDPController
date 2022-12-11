@@ -134,6 +134,21 @@ bool CUDPService::ConvertPDUtoFrame(PDUStruct _pdu, UInt8* const _frame)
     return true;
 }
 
+bool CUDPService::SendPDU(PDUStruct _pdu, const int _controllerid)
+{
+    UInt8* frame = new UInt8[_pdu.N];
+    if (!ConvertPDUtoFrame(_pdu, frame)) {
+        printf("Error: ConvertPDUtoFrame failed.\n");
+        return false;
+    }
+    if (!SendFrame(frame, _pdu.N, _controllerid)) {
+        printf("Error: SendFrame failed.\n");
+        return false;
+    }
+    delete[] frame;
+    return true;
+}
+
 CUDPService::~CUDPService()
 {
     WSACleanup();

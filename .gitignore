@@ -30,3 +30,22 @@
 *.exe
 *.out
 *.app
+*.vsidx
+*.lock
+*.ipch
+*.tlog
+*.recipe
+*.suo
+*.db
+/1.1 UDPServer&Client test/UDPClient/x64/Debug/UDPClient.ilk
+*.log
+*.pdb
+*.txt
+*.idb
+*.ilk
+*.enc
+*.filters
+*.user
+/2.2 SendAllFrame/SendAllFrame/.vs/SendAllFrame/v17
+/2.2 SendAllFrame/SendAllFrame/x64/Debug/moc
+/2.2 SendAllFrame/SendAllFrame/x64/Debug

@@ -2,11 +2,15 @@
 
 #pragma once
 
-#include "ui_SendAllFrame.h"
+#include "ui_CController.h"
 #include "CUDPService.h"
 #include "datatype.h"
-#include "CHeartBeatManager.h"
-#include "CCommandFrameManager.h"
+#include "CHbFrameMgr.h"
+#include "CSCCmdFrameMgr.h"
+#include "CCommCmdFrameMgr.h"
+#include "CPwrCmdFrameMgr.h"
+#include "CRuntimeCmdFrameMgr.h"
+
 #include <QtWidgets/QWidget>
 #include <QtCore/QTimer>
 
@@ -34,15 +38,29 @@ public slots:
     /// @brief 开始设备自检;
     void slotClickSelfCheckBtn();
 
+    /// @brief 开始通信控制
+    void slotClickCommCtrlBtn();
+
+    /// @brief 开始上电控制
+    void slotClickPwrCtrlBtn();
+
+    /// @brief 获取运行事件
+    void slotClickGetRuntimeBtn();
 
 private:
-    Ui::SendAllFrameClass ui;
+    Ui::CControllerClass ui;
 
     std::shared_ptr<CUDPService> m_UDPService;
 
-    CHeartBeatManager m_SyncManager;
+    CHbFrameMgr m_SyncManager;
     
-    CCommandFrameManager m_CommandFrameManager;
+    CSCCmdFrameMgr m_CSCManager;
+
+    CCommCmdFrameMgr m_CCommManager;
+
+    CPwrCmdFrameMgr m_CPwrManager;
+
+    CRuntimeCmdFrameMgr m_CRuntimeManager;
 
     int m_ControllerID = 1; //控制器id，取值为1-15
 };
