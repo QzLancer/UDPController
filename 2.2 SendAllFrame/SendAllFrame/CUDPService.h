@@ -4,6 +4,7 @@
 
 #include <WinSock2.h>
 #include <iostream>
+#include <QtNetwork/QUdpSocket>
 
 #pragma comment(lib,"ws2_32.lib")
 
@@ -20,7 +21,7 @@ public:
 	/// @return 如果程序正确，返回true
 	bool SendFrame(const UInt8 _frame[256], const int _size, const int _controllerid);
 
-	bool RecvFrame(UInt8* const _frame, const int _size, const int _controllerid);
+	//bool RecvFrame(UInt8* const _frame, const int _size, const int _controllerid);
 
 	/// @brief 设置主机ip
 	/// @param _hostip 主机ip，默认为192.168.1.1
@@ -43,19 +44,18 @@ public:
 	bool SetInitControllerPort(const int _port = 60000);
 
 	/// @brief 选择控制器，并将主机ip地址和对应的端口号绑定到socket（绑定一个控制器）
-	/// @param _controllerid 控制器ID，取值范围为1-15 
 	/// @return 如果程序正常，返回true
-	bool ConnectSocket(const int _controllerid);
+	bool ConnectSocket();
 
 	/// @brief 断开和控制器的连接
 	/// @param _controllerid 控制器ID，取值范围为1-15
 	/// @return 如果程序正常，返回true
-	bool DisconncetSocket(const int _controllerid);
+	bool DisconncetSocket();
 
 	/// @brief 获得某id控制器的连接状态
 	/// @param _controllerid 控制器ID，取值范围为1-15
 	/// @return 如果该控制器以连接到主机，返回true，否则返回false
-	bool ConnectStatus(const int _controllerid) const;
+	bool ConnectStatus() const;
 
 	/// @brief 将PDU结构体转换成帧数据
 	/// @param _pdu PDU结构体
@@ -68,7 +68,7 @@ public:
 	/// @brief 析构函数，关闭WSA和socket
 	~CUDPService();
 
-
+	QUdpSocket m_QSocket;
 
 private:
 	/// @brief 验证ipv4地址是否合法，
@@ -79,18 +79,21 @@ private:
 
 	// socket相关变量
 
-	SOCKET m_HostSocket[cMaxConnection];
+	//SOCKET m_HostSocket[cMaxConnection];
 	sockaddr_in m_HostAddr;
 	int m_HostAddrLen = sizeof(m_HostAddr);
 	sockaddr_in m_ControllerAddr;
 	int m_ControllerAddrLen = sizeof(m_ControllerAddr);
+	
 
 	// ip和port相关变量
 
 	char m_HostIP[128] = {"192.168.1.1"}, m_ControllerIP[128] = {"192.168.1.30"};
-	u_short m_InitHostPort { 60100 }, m_InitControllerPort {60000};
+	u_short m_HostPort { 60100 }, m_ControllerPort {60000};
 
 	// 连接管理
-	bool m_bIsConnect[15] = { false };
+	//bool m_bIsConnect[15] = { false };
+
+	bool m_bIsConnect = false;
 };
 

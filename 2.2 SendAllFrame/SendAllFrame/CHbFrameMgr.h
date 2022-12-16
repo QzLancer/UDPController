@@ -20,7 +20,6 @@ public:
 
 	void StopHeartBeat(int _id);
 
-protected:
 	virtual void _ParseFrame(UInt8* const _recvframe) override;
 
 private:

@@ -19,7 +19,8 @@ void CRuntimeCmdFrameMgr::ExecCommand(int _id)
 		m_PDUStruct.DA = 0x10 + _id - 1; //控制器代号1
 		//第1字节数据：1
 		m_PDUStruct.FrameData[0] = 1;
-		m_CommandTimer.start(m_CommandGap);
+		m_CommandTimer.setInterval(m_CommandGap);
+		m_CommandTimer.start();
 	}
 }
 

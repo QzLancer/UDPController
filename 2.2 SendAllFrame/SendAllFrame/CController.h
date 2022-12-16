@@ -10,6 +10,8 @@
 #include "CCommCmdFrameMgr.h"
 #include "CPwrCmdFrameMgr.h"
 #include "CRuntimeCmdFrameMgr.h"
+#include "CMsgFrameMgr.h"
+#include "CResetCmdFrameMgr.h"
 
 #include <QtWidgets/QWidget>
 #include <QtCore/QTimer>
@@ -55,13 +57,20 @@ private:
 
     CHbFrameMgr m_SyncManager;
     
-    CSCCmdFrameMgr m_CSCManager;
+    CSCCmdFrameMgr m_SelfCheckManager;
 
-    CCommCmdFrameMgr m_CCommManager;
+    CCommCmdFrameMgr m_CommManager;
 
-    CPwrCmdFrameMgr m_CPwrManager;
+    CPwrCmdFrameMgr m_PwrManager;
 
-    CRuntimeCmdFrameMgr m_CRuntimeManager;
+    CRuntimeCmdFrameMgr m_RuntimeManager;
+
+    CMsgFrameMgr m_MessageManager;
+
+    CResetCmdFrameMgr m_ResetManager;
 
     int m_ControllerID = 1; //控制器id，取值为1-15
+
+private slots:
+    void __slotRecvFrame();
 };

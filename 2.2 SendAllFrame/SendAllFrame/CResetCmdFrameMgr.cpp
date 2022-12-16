@@ -20,7 +20,8 @@ void CResetCmdFrameMgr::ExecCommand(int _id, bool _deviceselect[10], bool _isonp
 		//第1-2字节数据：0x55
 		m_PDUStruct.FrameData[0] = 0x55;
 		m_PDUStruct.FrameData[1] = 0x55;
-		m_CommandTimer.start(m_CommandGap);
+		m_CommandTimer.setInterval(m_CommandGap);
+		m_CommandTimer.start();
 	}
 }
 

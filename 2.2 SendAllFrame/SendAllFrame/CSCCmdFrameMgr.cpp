@@ -21,7 +21,8 @@ void CSCCmdFrameMgr::ExecCommand(int _id)
 		for (int i = 0; i < 8; ++i) {
 			m_PDUStruct.FrameData[i] = 0x00;
 		}
-		m_CommandTimer.start(m_CommandGap);
+		m_CommandTimer.setInterval(m_CommandGap);
+		m_CommandTimer.start();
 	}
 }
 

@@ -18,7 +18,8 @@ void CCommCmdFrameMgr::ExecCommand(int _id, bool _isforbidsend)
 		m_PDUStruct.PF2 = 0x03;
 		m_PDUStruct.DA = 0x10 + _id - 1; //¿ØÖÆÆ÷´úºÅ1
 		m_PDUStruct.FrameData[0] = _isforbidsend;
-		m_CommandTimer.start(m_CommandGap);
+		m_CommandTimer.setInterval(m_CommandGap);
+		m_CommandTimer.start();
 	}
 }
 

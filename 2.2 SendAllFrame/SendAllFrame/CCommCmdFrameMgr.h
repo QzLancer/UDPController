@@ -13,7 +13,6 @@ public:
     /// @param _isforbiddata 设备通信约束，0-允许发送数据，1-禁止发送数据
     void ExecCommand(int _id, bool _isforbidsend);
 
-protected:
     virtual void _ParseFrame(UInt8* const _recvframe) override;
 
 private:

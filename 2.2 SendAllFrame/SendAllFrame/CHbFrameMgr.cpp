@@ -3,6 +3,12 @@
 CHbFrameMgr::CHbFrameMgr(std::shared_ptr<CUDPService> _udpservice):
 	IFrameMgr(_udpservice)
 {
+	m_SendFrameSize = 15;
+	m_RecvFrameSize = 15;
+
+	m_SendFrame = new UInt8[m_SendFrameSize];
+	m_RecvFrame = new UInt8[m_RecvFrameSize];
+
 	m_PDUStruct.N = 15;
 	m_PDUStruct.PF1 = 0x00;
 	m_PDUStruct.PF2 = 0x00;
@@ -65,20 +71,18 @@ void CHbFrameMgr::__slotSendHeartBeatPDU()
 	timestick += time.hour() * 60 * 60 * 1000;
 
 	// 整理PDU
-	for (int i = 0; i < 3; ++i) {
+	for (int i = 0; i < 4; ++i) {
 		m_PDUStruct.FrameData[i] = (timestick % 256);
 		timestick /= 256;
 	}
 
 	// 将PDU转换成帧
-	UInt8 sendframe[15] = { 0 };
-	m_UDPService->ConvertPDUtoFrame(m_PDUStruct, sendframe);
-	UInt8 recvframe[15] = { 0 };
+	m_UDPService->ConvertPDUtoFrame(m_PDUStruct, m_SendFrame);
 
 	// 发送帧
-	if (m_UDPService->SendFrame(sendframe, 15, 1)) {
-		if (m_UDPService->RecvFrame(recvframe, 15, 1)) {
-			_ParseFrame(recvframe);
-		}
+	if (m_UDPService->SendFrame(m_SendFrame, 15, 1)) {
+		//if (m_UDPService->RecvFrame(recvframe, 15, 1)) {
+		//	_ParseFrame(recvframe);
+		//}
 	};
 }

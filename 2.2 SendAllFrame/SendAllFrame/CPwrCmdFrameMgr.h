@@ -15,7 +15,6 @@ public:
     /// @param _isonpower 
     void ExecCommand(int _id, bool _deviceselect[10], bool _isonpower);
 
-protected:
     virtual void _ParseFrame(UInt8* const _recvframe) override;
 
 private:

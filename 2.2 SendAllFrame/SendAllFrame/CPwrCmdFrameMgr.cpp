@@ -28,7 +28,8 @@ void CPwrCmdFrameMgr::ExecCommand(int _id, bool _deviceselect[10], bool _isonpow
 		}
 		//第3字节数据：上电控制
 		m_PDUStruct.FrameData[2] = _isonpower;
-		m_CommandTimer.start(m_CommandGap);
+		m_CommandTimer.setInterval(m_CommandGap);
+		m_CommandTimer.start();
 	}
 }
 

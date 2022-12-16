@@ -11,13 +11,13 @@ class IFrameMgr : public QObject
 
 public:
 	explicit IFrameMgr(std::shared_ptr<CUDPService> _udpservice);
-
+	
 	virtual ~IFrameMgr();
 
+	virtual void _ParseFrame(UInt8* const _recvframe) = 0;
 protected:
 	/// @brief 对不同类型的帧进行解析
 	/// @param _recvframe 接受到的帧
-	virtual void _ParseFrame(UInt8* const _recvframe) = 0;
 
 	std::shared_ptr<CUDPService> m_UDPService;
 

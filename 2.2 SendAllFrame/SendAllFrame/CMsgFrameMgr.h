@@ -8,7 +8,6 @@ class CMsgFrameMgr :
 public:
     explicit CMsgFrameMgr(std::shared_ptr<CUDPService> _udpservice);
 
-protected:
     virtual void _ParseFrame(UInt8* const _recvframe) override;
 
 private:

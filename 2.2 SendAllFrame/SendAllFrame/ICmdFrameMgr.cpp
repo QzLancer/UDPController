@@ -4,6 +4,13 @@ ICmdFrameMgr::ICmdFrameMgr(std::shared_ptr<CUDPService> _udpservice):
 	IFrameMgr(_udpservice)
 {
 	connect(&m_CommandTimer, SIGNAL(timeout()), this, SLOT(__slotSendPDU()));
+	connect(&m_RecvTimer, SIGNAL(timeout()), this, SLOT(__slotTimeout()));
+}
+
+void ICmdFrameMgr::StopRecv()
+{
+	m_CommandTimer.stop();
+	m_RecvTimer.stop();
 }
 
 void ICmdFrameMgr::__slotSendPDU()
@@ -11,7 +18,7 @@ void ICmdFrameMgr::__slotSendPDU()
 	m_UDPService->ConvertPDUtoFrame(m_PDUStruct, m_SendFrame);
 
 	if (m_UDPService->SendFrame(m_SendFrame, m_SendFrameSize, 1)) {
-		if (m_UDPService->RecvFrame(m_RecvFrame, m_RecvFrameSize, 1)) {
+		/*if (m_UDPService->RecvFrame(m_RecvFrame, m_RecvFrameSize, 1)) {
 			printf("Message: Received response.\n");
 			printf("frame: ");
 			for (int i = 0; i < m_RecvFrameSize; ++i) {
@@ -36,6 +43,19 @@ void ICmdFrameMgr::__slotSendPDU()
 					m_CommandTimer.stop();
 				}
 			}
-		}
+		}*/
+		m_RecvTimer.setInterval(m_RecvGap);
+		m_RecvTimer.start();
+	}
+}
+
+void ICmdFrameMgr::__slotTimeout()
+{
+	m_CommandCount++;
+	m_RecvTimer.stop();
+	if (m_CommandCount >= 3) {
+		m_CommandCount = 0;
+		printf("Message: Communication failed.\n");
+		m_CommandTimer.stop();
 	}
 }
